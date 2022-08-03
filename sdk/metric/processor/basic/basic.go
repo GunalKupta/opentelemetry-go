@@ -365,7 +365,7 @@ func (b *state) ForEach(exporter aggregation.TemporalitySelector, f func(export.
 
 		// If the processor does not have Config.Memory and it was not updated
 		// in the prior round, do not visit this value.
-		if !b.config.Memory && value.updated != (b.finishedCollection-1) {
+		if (aggTemp == aggregation.DeltaTemporality || !b.config.Memory) && value.updated != (b.finishedCollection-1) {
 			continue
 		}
 
